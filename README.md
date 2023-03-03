@@ -17,7 +17,6 @@ Overall, this project provides a simple and user-friendly interface for performi
 ![app screenshot](/application.png)
 
 # Application Templete 
-<a href="https://github.com/joako1991/MaIAWinterSchoolPyQt5" target="_blank">MaIAWinterSchoolPyQt5</a>
-
+[MaIAWinterSchoolPyQt5](https://github.com/joako1991/MaIAWinterSchoolPyQt5/){:target="_blank" rel="noopener"}
 # PyQt5
-<a href="https://doc.qt.io/qtforpython/" target="_blank">Documentation</a>
+[Documentation](https://doc.qt.io/qtforpython/){:target="_blank" rel="noopener"}

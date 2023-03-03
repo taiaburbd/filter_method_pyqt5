@@ -7,12 +7,6 @@ One important note is that the input image should be converted to grayscale as s
 
 Overall, this project provides a simple and user-friendly interface for performing basic image processing tasks, allowing users to experiment with different filter options and kernel sizes to achieve the desired output.
 
-### Requirment
-- [ ] Create a project to open an image, filter it with some spatial filter that you can choose by the user interface, and show both, input and output images.
-- [ ] The image to use should be chosen by the user, by suing the interface.
-- [ ] Ideas of filters: average smoothing, gaussian, laplacian, sober, Roberts.
-- [ ] When the filter can have different sizes, this value should be provided by the user.
-
 ### Application screenshot
 ![app screenshot](/application.png)
 

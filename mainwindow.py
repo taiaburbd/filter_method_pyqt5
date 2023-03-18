@@ -11,7 +11,7 @@ from PyQt5.QtWidgets import QMessageBox,\
     QSlider,\
     QLabel,\
     QWidget
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QRect
 import numpy as np
 from image_widget import ImageWidget
 
@@ -20,20 +20,14 @@ import os
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
-        '''
-        Constructor. In this function, we create all the variables we will use
-        in the code. If we cannot assign any value yet, we assign None. This way,
-        from the beginning of the class, we know all the variables that belongs
-        to the class. If not, we have to read all the code in order to know, and
-        if we read the variable and it has not been created yet, the program will
-        crash.        
-        '''
         super(MainWindow, self).__init__(parent)
 
         self.right_layout = QVBoxLayout()
         self.left_layout = QVBoxLayout()
         self.main_layout = QHBoxLayout()
 
+        self.output_image = QLabel()
+        
         self.image_widget_top = None
         self.image_widget_bottom = None
 
@@ -74,7 +68,9 @@ class MainWindow(QMainWindow):
 
         left_widget.setLayout(self.left_layout)
         left_scroll.setWidget(left_widget)
+
         self.right_layout.addStretch(1)
+        
         right_widget.setLayout(self.right_layout)
         right_scroll.setWidget(right_widget)
 
@@ -159,16 +155,16 @@ class MainWindow(QMainWindow):
         self.image_widget_bottom = ImageWidget(self)
         
         # We load an image to show
-        root_dir = os.path.dirname(os.path.realpath(__file__))
-        filepath = os.path.join(root_dir, 'images/Lenna_GL.png')
-        filepath=import_image[0]
-        img = cv2.imread(filepath, cv2.IMREAD_ANYCOLOR | cv2.IMREAD_ANYDEPTH)
+        img = cv2.imread(import_image[0], cv2.IMREAD_ANYCOLOR | cv2.IMREAD_ANYDEPTH)
         self.gray_image=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         if not img is None:
             self.image_widget_top.updateImage(img)
         
-        self.left_layout.addWidget(self.image_widget_top)
+        l1 = QLabel()
+        l1.setText("Orginal Image")
+        self.right_layout.addWidget(l1)
+        self.right_layout.addWidget(self.image_widget_top)
     
     def filter_action(self):
         filter_size=self.slider_initial_value
@@ -220,10 +216,16 @@ class MainWindow(QMainWindow):
             msgBox.setWindowTitle("Warning")
             msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
             msgBox.exec()
+
     def filtered_image(self,img2):
              # We load another filter image to show
         if not img2 is None:
             self.image_widget_bottom.updateImage(img2)
+
+
+        self.output_image.setText("Processed Image")
+
+        self.left_layout.addWidget(self.output_image)
 
         # We add the widget to the Left layout
         self.left_layout.addWidget(self.image_widget_bottom)
